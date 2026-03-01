@@ -45,11 +45,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          # Note: cache: 'npm' requires package-lock.json — omitted intentionally
 
       # ── Step 3: Install dependencies ─────────────────────────────
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       # ── Step 4: Run MC/DC test suite ─────────────────────────────
       - name: Run Jest MC/DC tests with coverage
