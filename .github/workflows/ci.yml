@@ -20,7 +20,7 @@ name: MC/DC Test Suite & Coverage
 on:
   push:
     branches:
-      - '**'          # Run on every branch push
+      - "**" # Run on every branch push
   pull_request:
     branches:
       - main
@@ -32,8 +32,9 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false # Don't cancel other matrix jobs on failure
       matrix:
-        node-version: [18.x, 20.x]   # Test on two LTS versions
+        node-version: [18.x, 20.x] # Test on two LTS versions
 
     steps:
       # ── Step 1: Checkout ─────────────────────────────────────────
@@ -58,7 +59,7 @@ jobs:
       # ── Step 5: Upload coverage report ───────────────────────────
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
-        if: always()                  # Upload even on test failure
+        if: always() # Upload even on test failure
         with:
           name: coverage-report-node${{ matrix.node-version }}
           path: coverage/
